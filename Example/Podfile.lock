@@ -1,0 +1,16 @@
+PODS:
+  - PALPermission (0.1.0)
+
+DEPENDENCIES:
+  - PALPermission (from `../`)
+
+EXTERNAL SOURCES:
+  PALPermission:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  PALPermission: ce42e0a75fad71d698fa2c8595b323071000413b
+
+PODFILE CHECKSUM: ee9901491ff90e9caf399923a23910cc7d075e40
+
+COCOAPODS: 1.10.0
