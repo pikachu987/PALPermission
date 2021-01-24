@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PALPermission'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'PALPermission'
   s.description      = <<-DESC
 My Lib PALPermission
@@ -34,5 +34,13 @@ My Lib PALPermission
   
   s.subspec 'Contact' do |sp|
       sp.source_files = 'PALPermission/Classes/PermissionType/Permission+Contact.swift', 'PALPermission/Classes/*.swift'
+  end
+  
+  s.subspec 'Notification' do |sp|
+      sp.source_files = 'PALPermission/Classes/PermissionType/Permission+Notification.swift', 'PALPermission/Classes/*.swift'
+  end
+  
+  s.subspec 'Microphone' do |sp|
+      sp.source_files = 'PALPermission/Classes/PermissionType/Permission+Microphone.swift', 'PALPermission/Classes/*.swift'
   end
 end

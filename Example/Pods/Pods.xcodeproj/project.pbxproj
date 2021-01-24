@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		106F2457880E662DCBBFBC8457DB8334 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
 		1393DB247FD469377085E8F733AF157F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		182ACDFA25BD613C0089F222 /* Permission+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182ACDF925BD613C0089F222 /* Permission+Notification.swift */; };
+		182ACE0125BD692B0089F222 /* Permission+Microphone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182ACE0025BD692B0089F222 /* Permission+Microphone.swift */; };
 		187E2BC025B4633C00826F2E /* Permission+Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E2BBF25B4633C00826F2E /* Permission+Audio.swift */; };
 		187E2BD925B4650C00826F2E /* Permission+Gallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E2BD825B4650C00826F2E /* Permission+Gallery.swift */; };
 		187E2C2825B46FBE00826F2E /* Permission+Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187E2C2725B46FBE00826F2E /* Permission+Camera.swift */; };
@@ -43,6 +45,8 @@
 /* Begin PBXFileReference section */
 		0A80F765536651C6BD553F95BEC8AD28 /* Permission.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Permission.swift; path = PALPermission/Classes/Permission.swift; sourceTree = "<group>"; };
 		0C59424839132A7D6828E380E2759773 /* Pods-PALPermission_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PALPermission_Tests-umbrella.h"; sourceTree = "<group>"; };
+		182ACDF925BD613C0089F222 /* Permission+Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Permission+Notification.swift"; sourceTree = "<group>"; };
+		182ACE0025BD692B0089F222 /* Permission+Microphone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Permission+Microphone.swift"; sourceTree = "<group>"; };
 		187E2BBF25B4633C00826F2E /* Permission+Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Permission+Audio.swift"; sourceTree = "<group>"; };
 		187E2BD825B4650C00826F2E /* Permission+Gallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Permission+Gallery.swift"; sourceTree = "<group>"; };
 		187E2C2725B46FBE00826F2E /* Permission+Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Permission+Camera.swift"; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 				187E2C2725B46FBE00826F2E /* Permission+Camera.swift */,
 				187E2BBF25B4633C00826F2E /* Permission+Audio.swift */,
 				187E2C2C25B470CD00826F2E /* Permission+Contact.swift */,
+				182ACDF925BD613C0089F222 /* Permission+Notification.swift */,
+				182ACE0025BD692B0089F222 /* Permission+Microphone.swift */,
 			);
 			name = PermissionType;
 			path = PALPermission/Classes/PermissionType;
@@ -406,9 +412,11 @@
 			files = (
 				187E2C2D25B470CD00826F2E /* Permission+Contact.swift in Sources */,
 				6C20127E0E0FD0060768B28271A182BC /* PALPermission-dummy.m in Sources */,
+				182ACDFA25BD613C0089F222 /* Permission+Notification.swift in Sources */,
 				27D8C6B5FB34F71A53CDFCBDE0498047 /* Permission.swift in Sources */,
 				187E2C2825B46FBE00826F2E /* Permission+Camera.swift in Sources */,
 				187E2BC025B4633C00826F2E /* Permission+Audio.swift in Sources */,
+				182ACE0125BD692B0089F222 /* Permission+Microphone.swift in Sources */,
 				187E2BD925B4650C00826F2E /* Permission+Gallery.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -583,6 +591,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 0.1.1;
 				MODULEMAP_FILE = "Target Support Files/PALPermission/PALPermission.modulemap";
 				PRODUCT_MODULE_NAME = PALPermission;
 				PRODUCT_NAME = PALPermission;
@@ -614,6 +623,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 0.1.1;
 				MODULEMAP_FILE = "Target Support Files/PALPermission/PALPermission.modulemap";
 				PRODUCT_MODULE_NAME = PALPermission;
 				PRODUCT_NAME = PALPermission;
