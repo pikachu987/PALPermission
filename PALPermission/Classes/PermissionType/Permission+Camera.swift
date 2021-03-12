@@ -26,17 +26,17 @@ extension Permission {
         public var status: AVAuthorizationStatus
     }
     
-    private static func permission(_ handler: @escaping ((Result<Void, CameraError>) -> Void)) {
+    private static func permission(_ handler: @escaping ((Result<AVAuthorizationStatus, CameraError>) -> Void)) {
         let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         if status == .authorized {
-            handler(.success(()))
+            handler(.success(status))
         } else if status == .denied {
             handler(.failure(.init(status: status)))
         } else {
             AVCaptureDevice.requestAccess(for: AVMediaType.video) { (isAccess) in
                 DispatchQueue.main.async {
                     if isAccess {
-                        handler(.success(()))
+                        handler(.success(.authorized))
                     } else {
                         handler(.failure(.init(status: .denied)))
                     }
@@ -46,7 +46,7 @@ extension Permission {
         }
     }
     
-    public static func camera(_ queue: DispatchQueue? = nil, handler: @escaping ((Result<Void, CameraError>) -> Void)) {
+    public static func camera(_ queue: DispatchQueue? = nil, handler: @escaping ((Result<AVAuthorizationStatus, CameraError>) -> Void)) {
         if let queue = queue {
             queue.async {
                 self.permission(handler)

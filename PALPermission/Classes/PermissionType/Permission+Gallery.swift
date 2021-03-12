@@ -26,10 +26,10 @@ extension Permission {
         public var status: PHAuthorizationStatus
     }
     
-    private static func permission(_ handler: @escaping ((Result<Void, GalleryError>) -> Void)) {
+    private static func permission(_ handler: @escaping ((Result<PHAuthorizationStatus, GalleryError>) -> Void)) {
         let status = PHPhotoLibrary.authorizationStatus()
         if status == .authorized {
-            handler(.success(()))
+            handler(.success(status))
         } else if status == .denied || status == .restricted {
             handler(.failure(.init(status: status)))
         } else {
@@ -37,7 +37,7 @@ extension Permission {
                 DispatchQueue.main.async {
                     switch status {
                     case .authorized:
-                        handler(.success(()))
+                        handler(.success(status))
                     default:
                         handler(.failure(.init(status: status)))
                     }
@@ -47,10 +47,10 @@ extension Permission {
     }
     
     @available(iOS 14, *)
-    private static func permission(_ accessLevel: PHAccessLevel, handler: @escaping ((Result<Void, GalleryError>) -> Void)) {
+    private static func permission(_ accessLevel: PHAccessLevel, handler: @escaping ((Result<PHAuthorizationStatus, GalleryError>) -> Void)) {
         let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         if status == .authorized || status == .limited {
-            handler(.success(()))
+            handler(.success(status))
         } else if status == .denied || status == .restricted {
             handler(.failure(.init(status: status)))
         } else {
@@ -58,7 +58,7 @@ extension Permission {
                 DispatchQueue.main.async {
                     switch status {
                     case .authorized, .limited:
-                        handler(.success(()))
+                        handler(.success(status))
                     default:
                         handler(.failure(.init(status: status)))
                     }
@@ -68,7 +68,7 @@ extension Permission {
     }
     
     
-    public static func gallery(_ queue: DispatchQueue? = nil, handler: @escaping ((Result<Void, GalleryError>) -> Void)) {
+    public static func gallery(_ queue: DispatchQueue? = nil, handler: @escaping ((Result<PHAuthorizationStatus, GalleryError>) -> Void)) {
         if #available(iOS 14, *) {
             if let queue = queue {
                 queue.async {
@@ -89,7 +89,7 @@ extension Permission {
     }
     
     @available(iOS 14, *)
-    public static func gallery(_ queue: DispatchQueue? = nil, accessLevel: PHAccessLevel = .readWrite, handler: @escaping ((Result<Void, GalleryError>) -> Void)) {
+    public static func gallery(_ queue: DispatchQueue? = nil, accessLevel: PHAccessLevel = .readWrite, handler: @escaping ((Result<PHAuthorizationStatus, GalleryError>) -> Void)) {
         if let queue = queue {
             queue.async {
                 self.permission(accessLevel, handler: handler)

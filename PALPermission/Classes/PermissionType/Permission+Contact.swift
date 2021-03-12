@@ -26,10 +26,10 @@ extension Permission {
         public var status: CNAuthorizationStatus
     }
 
-    private static func permission(_ handler: @escaping ((Result<Void, ContactError>) -> Void)) {
+    private static func permission(_ handler: @escaping ((Result<CNAuthorizationStatus, ContactError>) -> Void)) {
         let status = CNContactStore.authorizationStatus(for: .contacts)
         if status == .authorized {
-            handler(.success(()))
+            handler(.success(status))
         } else if status == .denied {
             handler(.failure(.init(status: status)))
         } else {
@@ -37,7 +37,7 @@ extension Permission {
             store.requestAccess(for: .contacts) { (isGranted, error) in
                 DispatchQueue.main.async {
                     if isGranted {
-                        handler(.success(()))
+                        handler(.success(.authorized))
                     } else {
                         handler(.failure(.init(status: status)))
                     }
@@ -46,7 +46,7 @@ extension Permission {
         }
     }
 
-    public static func contact(_ queue: DispatchQueue? = nil, handler: @escaping ((Result<Void, ContactError>) -> Void)) {
+    public static func contact(_ queue: DispatchQueue? = nil, handler: @escaping ((Result<CNAuthorizationStatus, ContactError>) -> Void)) {
         if let queue = queue {
             queue.async {
                 self.permission(handler)

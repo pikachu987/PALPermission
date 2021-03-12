@@ -40,11 +40,11 @@ extension Permission {
         return notificationSettings?.authorizationStatus
     }
 
-    private static func permission(_ handler: @escaping ((Result<Void, NotificationError>) -> Void)) {
+    private static func permission(_ handler: @escaping ((Result<UNAuthorizationStatus, NotificationError>) -> Void)) {
         let status = self.check() ?? .denied
         DispatchQueue.main.async {
             if status == .authorized {
-                handler(.success(()))
+                handler(.success(status))
             } else if status == .denied {
                 handler(.failure(.init(status: status)))
             } else if status == .notDetermined {
@@ -52,7 +52,7 @@ extension Permission {
                     let status = self.check() ?? .denied
                     DispatchQueue.main.async {
                         if status == .authorized {
-                            handler(.success(()))
+                            handler(.success(status))
                         } else {
                             handler(.failure(.init(status: status)))
                         }
@@ -62,7 +62,7 @@ extension Permission {
         }
     }
 
-    public static func notification(_ queue: DispatchQueue? = nil, handler: @escaping ((Result<Void, NotificationError>) -> Void)) {
+    public static func notification(_ queue: DispatchQueue? = nil, handler: @escaping ((Result<UNAuthorizationStatus, NotificationError>) -> Void)) {
         if let queue = queue {
             queue.async {
                 self.permission(handler)

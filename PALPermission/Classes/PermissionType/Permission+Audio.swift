@@ -26,18 +26,18 @@ extension Permission {
         public var status: AVAudioSession.RecordPermission
     }
 
-    private static func permission(_ handler: @escaping ((Result<Void, AudioError>) -> Void)) {
+    private static func permission(_ handler: @escaping ((Result<AVAudioSession.RecordPermission, AudioError>) -> Void)) {
         let status = AVAudioSession.sharedInstance().recordPermission
         switch status {
         case .granted:
-            handler(.success(()))
+            handler(.success(status))
         case .denied:
             handler(.failure(.init(status: status)))
         case .undetermined:
             AVAudioSession.sharedInstance().requestRecordPermission { (granted) in
                 DispatchQueue.main.async {
                     if granted {
-                        handler(.success(()))
+                        handler(.success(.granted))
                     } else {
                         handler(.failure(.init(status: .denied)))
                     }
@@ -48,7 +48,7 @@ extension Permission {
         }
     }
 
-    public static func audio(_ queue: DispatchQueue? = nil, handler: @escaping ((Result<Void, AudioError>) -> Void)) {
+    public static func audio(_ queue: DispatchQueue? = nil, handler: @escaping ((Result<AVAudioSession.RecordPermission, AudioError>) -> Void)) {
         if let queue = queue {
             queue.async {
                 self.permission(handler)
